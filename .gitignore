@@ -2,11 +2,17 @@
 *.user
 *.suo
 *.aps
+*.slnx
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
 
 Debug/
 Release/
 x64/
 x86/
+bin/
+obj/
 [Bb]in/
 [Oo]bj/
 

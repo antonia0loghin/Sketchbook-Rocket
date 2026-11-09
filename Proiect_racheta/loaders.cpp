@@ -104,6 +104,3 @@ void LoadSVGObject(const char* filePath, GLuint& vaoId, GLuint& vboId, int& coun
 
     glBindVertexArray(0);
 }
-// TODO: Da paste aici la functiile tale:
-// - LoadScrollingTexture
-// - LoadSVGObject

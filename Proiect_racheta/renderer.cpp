@@ -82,6 +82,7 @@ void CreateVBO(void) {
 
     glBindVertexArray(0);
 }
+
 void DestroyShaders(void) {
     glDeleteProgram(ProgramId);
 }
@@ -276,7 +277,7 @@ void RenderFunction(void) {
 
     float angle = 0.0f;
     if (isFlying) {
-        angle = atan2(mouseY - rocketY, mouseX - rocketX) - 1.5708f;
+        angle = atan2(mouseY - rocketY, mouseX - rocketX) - 1.5708f; //corectia de orienta, pi/2 grade 
     }
     glm::mat4 rotateMat = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 0.0f, 1.0f));
 

@@ -2,9 +2,6 @@
 *.user
 *.suo
 *.aps
-*.slnx
-*.vcxproj
-*.vcxproj.filters
 *.vcxproj.user
 
 Debug/

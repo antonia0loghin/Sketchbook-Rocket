@@ -256,16 +256,6 @@ void RenderFunction(void) {
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindVertexArray(0);
     }
-    glUseProgram(BgProgramId);
-    glUniform1f(glGetUniformLocation(BgProgramId, "bgOffset"), -bgY * 0.3f);
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, BgTextureId);
-    glUniform1i(glGetUniformLocation(BgProgramId, "bgTexture"), 0);
-
-    glBindVertexArray(BgVaoId);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
-    glBindVertexArray(0);
 
     glUseProgram(ProgramId);
     glUniform1i(codColLocation, indexCuloare);
@@ -277,7 +267,7 @@ void RenderFunction(void) {
 
     float angle = 0.0f;
     if (isFlying) {
-        angle = atan2(mouseY - rocketY, mouseX - rocketX) - 1.5708f; //corectia de orienta, pi/2 grade 
+        angle = atan2(mouseY - rocketY, mouseX - rocketX) - 1.5708f; //corectia de orientare, pi/2 grade 
     }
     glm::mat4 rotateMat = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 0.0f, 1.0f));
 
@@ -287,38 +277,33 @@ void RenderFunction(void) {
     //matrice racheta
     glUniformMatrix4fv(myMatrixLocation, 1, GL_FALSE, &myMatrix[0][0]);
     glDrawArrays(GL_LINE_LOOP, 0, RachetaVertexCount);
-
     glBindVertexArray(0);
-
-
     glBindVertexArray(Copac1VaoId);
+    
     //matrice copac
     glm::mat4 translateCopac = glm::translate(glm::mat4(1.0f), glm::vec3(copac1X, copac1Y + bgY, 0.0f));
     glm::mat4 Copac1Matrix = resizeMatrix * translateCopac;
     glUniformMatrix4fv(myMatrixLocation, 1, GL_FALSE, &Copac1Matrix[0][0]);
-
     glDrawArrays(GL_LINE_LOOP, 0, Copac1VertexCount);
     glBindVertexArray(0);
 
-    glBindVertexArray(SoareVaoId);
     //matrice soare
+    glBindVertexArray(SoareVaoId);
     glm::mat4 translateSoare = glm::translate(glm::mat4(1.0f), glm::vec3(soareX, soareY + bgY, 0.0f));
     glm::mat4 SoareMatrix = resizeMatrix * translateSoare;
     glUniformMatrix4fv(myMatrixLocation, 1, GL_FALSE, &SoareMatrix[0][0]);
-
     glDrawArrays(GL_LINE_LOOP, 0, SoareVertexCount);
     glBindVertexArray(0);
-
-
     glBindVertexArray(PamantVaoId);
+    
     //matrice pamant
     glm::mat4 translatePamant = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, bgY, 0.0f));
     glm::mat4 PamantMatrix = resizeMatrix * translatePamant;
     glUniformMatrix4fv(myMatrixLocation, 1, GL_FALSE, &PamantMatrix[0][0]);
-
     glDrawArrays(GL_LINES, 0, 2);
     glBindVertexArray(0);
 
+    //matrice stele
     if (bgY < -0.8f) {
         float stea1Y = bgY + 2.5f;
         while (stea1Y < -1.2f) stea1Y += 2.4f;
@@ -344,8 +329,8 @@ void RenderFunction(void) {
 
     glBindVertexArray(0);
 
+    //matrice particule
     glBindVertexArray(ParticulaVaoId);
-
     for (const auto& p : particule) {
         glm::mat4 trans = glm::translate(glm::mat4(1.0f), glm::vec3(p.x, p.y, 0.0f));
         glm::mat4 sca = glm::scale(glm::mat4(1.0f), glm::vec3(p.life, p.life, 1.0f));
